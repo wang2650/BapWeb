@@ -26,9 +26,9 @@
       <el-table-column type="selection" width="50"></el-table-column>
       <el-table-column type="index" width="80"></el-table-column>
       <el-table-column prop="ID" width="80" label="用户ID"></el-table-column>
-      <el-table-column prop="NickName" label="昵称" width sortable></el-table-column>
-      <el-table-column prop="UserName" label="登录名" width sortable></el-table-column>
-      <el-table-column label="操作" width="150">
+      <el-table-column prop="NickName" label="昵称" width="150" ></el-table-column>
+      <el-table-column prop="UserName" label="登录名" width="150" ></el-table-column>
+      <el-table-column label="操作" >
         <template scope="scope">
 
           <el-button size="small" @click="resetpassword(scope.$index, scope.row)">重置密码</el-button>
@@ -94,8 +94,15 @@
           <el-input v-model="addForm.UserName" auto-complete="off" class="width200"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="PassWord">
-          <el-input v-model="addForm.PassWord" auto-complete="off" class="width200"></el-input>
+          <el-input v-model="addForm.PassWord" auto-complete="off" placeholder="不填则用默认密码" class="width200"></el-input>
         </el-form-item>
+         <el-form-item label="性别" prop="UserName">
+          <el-input v-model="addForm.UserName" auto-complete="off" class="width200"></el-input>
+        </el-form-item>
+
+
+
+
         <el-form-item label="介绍">
           <el-input type="textarea" v-model="addForm.Introduction"></el-input>
         </el-form-item>
@@ -162,7 +169,14 @@ export default {
         UserName: "",
         NickName: "",
         PassWord: "",
-        Introduction: ""
+        Introduction: "",
+        TelePhone:"",
+        RelationPerson:"",
+        Url:"",
+        UserKey:0,
+        Sex:0,
+        Sequence:0,
+        IsMustUseKey:0
       }
     };
   },

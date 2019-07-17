@@ -23,12 +23,32 @@
       @selection-change="selsChange"
       style="width: 100%;"
     >
+     <el-table-column type="expand">
+      <template slot-scope="props">
+        <el-form label-position="left" inline class="demo-table-expand">
+          <el-form-item label="性别">
+            <span>{{ sexText(props.row.Sex)  }}</span>
+          </el-form-item>
+          <el-form-item label="可用U盾">
+            <span>{{ yesornoText(props.row.UserKey) }}</span>
+          </el-form-item>
+            <el-form-item label="必用U盾">
+            <span>{{ yesornoText(props.row.IsMustUseKey)  }}</span>
+          </el-form-item>
+              <el-form-item label="介绍">
+            <span>{{ props.row.Introduction }}</span>
+          </el-form-item>
+        </el-form>
+      </template>
+    </el-table-column>
       <el-table-column type="selection" width="50"></el-table-column>
-      <el-table-column type="index" width="80"></el-table-column>
+      <el-table-column type="index" width="80" fixed></el-table-column>
       <el-table-column prop="ID" width="80" label="用户ID"></el-table-column>
       <el-table-column prop="NickName" label="昵称" width="150" ></el-table-column>
       <el-table-column prop="UserName" label="登录名" width="150" ></el-table-column>
-      <el-table-column label="操作" >
+      <el-table-column prop="TelePhone" label="电话" width="150" ></el-table-column>
+       <el-table-column prop="RelationPerson" label="联系人" width="150" ></el-table-column>
+      <el-table-column label="操作" fixed="right" >
         <template scope="scope">
 
           <el-button size="small" @click="resetpassword(scope.$index, scope.row)">重置密码</el-button>
@@ -68,7 +88,22 @@
         <el-form-item label="密码" prop="PassWord">
           <el-input v-model="editForm.PassWord" auto-complete="off"></el-input>
         </el-form-item>
+       <el-form-item label="性别" prop="Sex">
+           <el-radio v-model="editForm.Sex" label="1">男</el-radio> <el-radio v-model="editForm.Sex" label="2">女</el-radio> <el-radio v-model="editForm.Sex" label="3">未知</el-radio>
+        </el-form-item>
 
+        <el-form-item label="电话" prop="TelePhone">
+          <el-input v-model="editForm.TelePhone" auto-complete="off" class="width200"></el-input>
+        </el-form-item>
+        <el-form-item label="联系人" prop="RelationPerson">
+          <el-input v-model="editForm.RelationPerson" auto-complete="off" class="width200"></el-input>
+        </el-form-item>
+        <el-form-item label="可用U盾" prop="UserKey">
+           <el-radio v-model="editForm.UserKey" label="1">是</el-radio> <el-radio v-model="editForm.UserKey" label="2">否</el-radio> 
+        </el-form-item>
+        <el-form-item label="必用U盾" prop="IsMustUseKey">
+           <el-radio v-model="editForm.IsMustUseKey" label="1">是</el-radio> <el-radio v-model="editForm.IsMustUseKey" label="2">否</el-radio> 
+        </el-form-item>
         <el-form-item label="介绍">
           <el-input type="textarea" v-model="editForm.Introduction"></el-input>
         </el-form-item>
@@ -96,12 +131,22 @@
         <el-form-item label="密码" prop="PassWord">
           <el-input v-model="addForm.PassWord" auto-complete="off" placeholder="不填则用默认密码" class="width200"></el-input>
         </el-form-item>
-         <el-form-item label="性别" prop="UserName">
-          <el-input v-model="addForm.UserName" auto-complete="off" class="width200"></el-input>
+         <el-form-item label="性别" prop="Sex">
+           <el-radio v-model="addForm.Sex" label="1">男</el-radio> <el-radio v-model="radio" label="2">女</el-radio> <el-radio v-model="addForm.Sex" label="3">未知</el-radio>
         </el-form-item>
 
-
-
+        <el-form-item label="电话" prop="TelePhone">
+          <el-input v-model="addForm.TelePhone" auto-complete="off" class="width200"></el-input>
+        </el-form-item>
+        <el-form-item label="联系人" prop="RelationPerson">
+          <el-input v-model="addForm.RelationPerson" auto-complete="off" class="width200"></el-input>
+        </el-form-item>
+        <el-form-item label="可用U盾" prop="UserKey">
+           <el-radio v-model="addForm.UserKey" label="1">是</el-radio> <el-radio v-model="addForm.UserKey" label="2">否</el-radio> 
+        </el-form-item>
+        <el-form-item label="必用U盾" prop="IsMustUseKey">
+           <el-radio v-model="addForm.IsMustUseKey" label="1">是</el-radio> <el-radio v-model="addForm.IsMustUseKey" label="2">否</el-radio> 
+        </el-form-item>
 
         <el-form-item label="介绍">
           <el-input type="textarea" v-model="addForm.Introduction"></el-input>
@@ -116,6 +161,7 @@
 </template>
 
 <script>
+import {statelist,stateText,sexlist,sexText,yesornolist,yesornoText} from "@/api/commonfun";
 import {
   GetUserList,
   InsertUser,
@@ -152,7 +198,14 @@ export default {
         UserName: "",
         NickName: "",
         PassWord: "",
-        Introduction: ""
+        Introduction: "",
+        TelePhone:"",
+        RelationPerson:"",
+        Url:"",
+        UserKey:2,
+        Sex:1,
+        Sequence:0,
+        IsMustUseKey:2
       },
 
       addFormVisible: false, //新增界面是否显示
@@ -173,10 +226,10 @@ export default {
         TelePhone:"",
         RelationPerson:"",
         Url:"",
-        UserKey:0,
-        Sex:0,
+        UserKey:2,
+        Sex:1,
         Sequence:0,
-        IsMustUseKey:0
+        IsMustUseKey:2
       }
     };
   },

@@ -81,7 +81,7 @@ export function yesornolist(includeall) {
   }
   return
 }
-export function sexText(val) {
+export function yesornoText(val) {
   let result = '未知';
   switch (val) {
     case 0:

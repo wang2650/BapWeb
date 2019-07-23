@@ -228,7 +228,7 @@ import {
   UpdateRole
 } from "@/api/role";
 import { GetDepartmentAndSubDepartmentForCurrentUser } from "@/api/department";
-import { statelist, stateText } from "@/api/commonfun";
+import utils from "@/api/utils";
 import {
   GetMenuTreeForCurrentUserByDeparentId,
   ModifyMentForRole
@@ -294,7 +294,7 @@ export default {
         name: "",
         RoleId: 0
       },
-      userlist:[],
+      userlist: [],
       mulselectedusers: [],
       userlisttotal: 0
     };
@@ -338,7 +338,7 @@ export default {
       this.getroles();
     },
     getstatetext(val) {
-      return stateText(val);
+      return utils.stateText(val);
     },
     handleCurrentChange(val) {
       this.page = val;
@@ -422,13 +422,13 @@ export default {
 
     //显示编辑界面
     handleEdit: function(index, row) {
-      this.statelt = statelist();
+      this.statelt = utils.statelist();
       this.editFormVisible = true;
       this.editForm = Object.assign({}, row);
     },
     //显示新增界面
     handleAdd() {
-      this.statelt = statelist();
+      this.statelt = utils.statelist();
       this.addFormVisible = true;
       this.addForm = {
         id: 0,
@@ -554,7 +554,6 @@ export default {
       this.mulselectedusers = val;
     },
 
-
     //用户表分页
     handleUserListChange: function(val) {
       this.page = val;
@@ -601,7 +600,7 @@ export default {
       })
         .then(() => {
           this.NProgress.start();
-             let para = { UserIds: val, RoleId: this.userForm.RoleId };
+          let para = { UserIds: val, RoleId: this.userForm.RoleId };
 
           RemoveUserFromRole(para).then(res => {
             this.NProgress.done();
@@ -642,7 +641,7 @@ export default {
         let userids = Enumerable.from(this.mulselectedusers)
           .select(x => x.ID)
           .toArray();
-        this.mulselectedusers=[];
+        this.mulselectedusers = [];
         this.romveOneUserToRole(userids);
       }
     },
@@ -658,7 +657,7 @@ export default {
         let userids = Enumerable.from(this.mulselectedusers)
           .select(x => x.ID)
           .toArray();
-        this.mulselectedusers=[];
+        this.mulselectedusers = [];
         this.addUserToRole(userids);
       }
     }

@@ -203,7 +203,7 @@ import {
   AddUserForDepartment,
   RemoveUserForDepartment
 } from "@/api/department";
-import { statelist, stateText } from "@/api/commonfun";
+import utils from "@/api/utils";
 import { GetUsersRefDepartment } from "@/api/user";
 export default {
   data() {
@@ -297,7 +297,7 @@ export default {
       this.getList();
     },
     getstatetext(val) {
-      return stateText(val);
+      return utils.stateText(val);
     },
     handleCurrentChange(val) {
       this.page = val;
@@ -354,13 +354,13 @@ export default {
     },
     //显示编辑界面
     handleEdit: function(index, row) {
-      this.statelt = statelist();
+      this.statelt = utils.statelist();
       this.editFormVisible = true;
       this.editForm = Object.assign({}, row);
     },
     //显示新增界面
     handleAdd() {
-      this.statelt = statelist();
+      this.statelt = utils.statelist();
       this.addFormVisible = true;
       this.addForm = {
         id: 0,

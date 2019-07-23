@@ -211,7 +211,8 @@ export default {
         .then(() => {
           this.listLoading = true;
           //NProgress.start();
-          let para = { Id: row.ID };
+          let para = { Id: row.Id };
+          console.info("para:"+para.Id);
           DeleteDictByDictId(para).then(res => {
             this.listLoading = false;
             //NProgress.done();

@@ -19,10 +19,11 @@ export function UpdateDict(dataValue) {
 }
 //删除字典
 export function DeleteDictByDictId(dataValue) {
+    console.info("xxx:" + utils.queryParams(dataValue));
     return service({
         url: '/Api/Configmanage/Dict/DeleteDictByDictId' + utils.queryParams(dataValue),
         method: 'get',
-        data: ''
+
     })
 }
 //删除字典通过组名
@@ -30,7 +31,7 @@ export function DeleteDictByGroupName(dataValue) {
     return service({
         url: '/Api/Configmanage/Dict/DeleteDictByGroupName' + utils.queryParams(dataValue),
         method: 'get',
-        data: ''
+
     })
 }
 //获取字典列表

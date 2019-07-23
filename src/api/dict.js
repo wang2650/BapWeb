@@ -13,7 +13,7 @@ export function InsertDict(dataValue) {
 export function UpdateDict(dataValue) {
     return service({
         url: '/Api/Configmanage/Dict/UpdateDict',
-        method: 'get',
+        method: 'post',
         data: dataValue
     })
 }
@@ -28,7 +28,7 @@ export function DeleteDictByDictId(dataValue) {
 //删除字典通过组名
 export function DeleteDictByGroupName(dataValue) {
     return service({
-        url: '/Api/Configmanage/Dict/DeleteDictByGroupName' + utils.queryParams(dataValue),,
+        url: '/Api/Configmanage/Dict/DeleteDictByGroupName' + utils.queryParams(dataValue),
         method: 'get',
         data: ''
     })
@@ -36,7 +36,7 @@ export function DeleteDictByGroupName(dataValue) {
 //获取字典列表
 export function GetDictList(dataValue) {
     return service({
-        url: '/Api/Configmanage/Dict/UpdateDict',
+        url: '/Api/Configmanage/Dict/GetDictList',
         method: 'post',
         data: dataValue
     })

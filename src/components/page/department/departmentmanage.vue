@@ -51,7 +51,7 @@
         </template>
       </el-table-column>
       <el-table-column label="操作">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-button size="small" @click="diaplaySetUpUser(scope.$index, scope.row)">设置员工</el-button>
           <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
           <el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
@@ -164,7 +164,7 @@
           <template slot-scope="scope">{{ scope.row.DepartmentId===0 ? '否' : '是'}}</template>
         </el-table-column>
         <el-table-column label="操作" width="150">
-          <template scope="scope">
+          <template slot-scope="scope">
             <el-button size="small" @click="addOneUserToDepartment(scope.$index, scope.row)">加入</el-button>
             <el-button
               type="danger"

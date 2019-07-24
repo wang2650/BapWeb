@@ -35,6 +35,12 @@ export default new Router({
                     meta: { title: '字典管理' }
                 },
                 {
+                    path: '/customermanager',
+                    component: resolve => require(['../components/page/customer/customermanager.vue'], resolve),
+                    meta: { title: '干部管理' }
+                },
+                
+                {
                     path: '/departmentmanage',
                     component: resolve => require(['../components/page/department/departmentmanage.vue'], resolve),
                     meta: { title: '部门管理' }

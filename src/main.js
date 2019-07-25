@@ -17,8 +17,9 @@ import './assets/css/main.css';
 import './assets/css/icon.css';
 import './components/common/directives';
 import "babel-polyfill";
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 console.log('process:'+process.env.VUE_APP_URL)
+
 Vue.use(VueI18n);
 Vue.use(ElementUI, {
     size: 'small'

@@ -14,7 +14,6 @@
             <el-tab-pane label="基本信息项" name="first">用户管理</el-tab-pane>
             <el-tab-pane label="职务职级信息项" name="second">配置管理</el-tab-pane>
             <el-tab-pane label="任职单位" name="third">角色管理</el-tab-pane>
-        
           </el-tabs>
         </div>
       </el-col>
@@ -70,130 +69,129 @@
     >
       <el-row :gutter="24">
         <el-col :span="4">
+          <el-collapse>
+            <el-collapse-item title="常用信息" name="commoninfo">
+              <el-menu @select="handleSelectMenu">
+                <el-menu-item index="jbxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">基本信息</span>
+                </el-menu-item>
+                <el-menu-item index="xzzwxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">行政职务信息</span>
+                </el-menu-item>
+                <el-menu-item index="zjxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">职级信息</span>
+                </el-menu-item>
+                <el-menu-item index="xlxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">学历信息</span>
+                </el-menu-item>
+                <el-menu-item index="xwxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">学位信息</span>
+                </el-menu-item>
 
- <el-collapse>
-<el-collapse-item title="常用信息" name="commoninfo">
-          <el-menu @select="handleSelectMenu">
-          <el-menu-item index="jbxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">基本信息</span>
-            </el-menu-item>
-            <el-menu-item index="xzzwxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">行政职务信息</span>
-            </el-menu-item>
-            <el-menu-item index="zjxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">职级信息</span>
-            </el-menu-item>
-            <el-menu-item index="xlxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">学历信息</span>
-            </el-menu-item>
-                  <el-menu-item index="xwxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">学位信息</span>
-            </el-menu-item>
+                <el-menu-item index="llxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">履历信息</span>
+                </el-menu-item>
 
+                <el-menu-item index="jlzsxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">经历综述信息</span>
+                </el-menu-item>
 
-                  <el-menu-item index="llxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">履历信息</span>
-            </el-menu-item>
+                <el-menu-item index="zyjszgxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">专业技术资格信息</span>
+                </el-menu-item>
 
-      <el-menu-item index="jlzsxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">经历综述信息</span>
-            </el-menu-item>
+                <el-menu-item index="jtcyxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">家庭成员信息</span>
+                </el-menu-item>
 
-      <el-menu-item index="zyjszgxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">专业技术资格信息</span>
-            </el-menu-item>
+                <el-menu-item index="pxxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">培训信息</span>
+                </el-menu-item>
 
-      <el-menu-item index="jtcyxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">家庭成员信息</span>
-            </el-menu-item>
+                <el-menu-item index="cgxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">出国信息</span>
+                </el-menu-item>
+                <el-menu-item index="jcxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">奖惩信息</span>
+                </el-menu-item>
 
-      <el-menu-item index="pxxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">培训信息</span>
-            </el-menu-item>
+                <el-menu-item index="bcxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">补充信息</span>
+                </el-menu-item>
 
-      <el-menu-item index="cgxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">出国信息</span>
-            </el-menu-item>
-      <el-menu-item index="jcxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">奖惩信息</span>
-            </el-menu-item>
+                <el-menu-item index="zzkhkcxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">组织考核考察信息</span>
+                </el-menu-item>
 
-      <el-menu-item index="bcxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">补充信息</span>
-            </el-menu-item>
+                <el-menu-item index="dztxxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">地址通信信息</span>
+                </el-menu-item>
 
-      <el-menu-item index="zzkhkcxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">组织考核考察信息</span>
-            </el-menu-item>
+                <el-menu-item index="zzkhxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">组织考核信息</span>
+                </el-menu-item>
+                <el-menu-item index="jlxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">交流信息</span>
+                </el-menu-item>
+                <el-menu-item index="xlxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">学历信息</span>
+                </el-menu-item>
+              </el-menu>
+            </el-collapse-item>
 
-      <el-menu-item index="dztxxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">地址通信信息</span>
-            </el-menu-item>
-
-      <el-menu-item index="zzkhxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">组织考核信息</span>
-            </el-menu-item>
-      <el-menu-item index="jlxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">交流信息</span>
-            </el-menu-item>
-      <el-menu-item index="xlxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">学历信息</span>
-            </el-menu-item>
-
-          </el-menu>
-
-
-           </el-collapse-item>
-
-<el-collapse-item title="其他信息" name="otherinfo">
-          <el-menu @select="handleSelectMenu">
-          <el-menu-item index="hbgbxx">
-              <i class="el-icon-menu"></i>
-              <span slot="title">后备干部信息</span>
-            </el-menu-item>
-
-           </el-menu>
-
-
-           </el-collapse-item>
-
-
-           </el-collapse>
+            <el-collapse-item title="其他信息" name="otherinfo">
+              <el-menu @select="handleSelectMenu">
+                <el-menu-item index="hbgbxx">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">后备干部信息</span>
+                </el-menu-item>
+              </el-menu>
+            </el-collapse-item>
+          </el-collapse>
         </el-col>
         <el-col :span="20">
-           <div>
+          <div>
+            <el-form label-width="80px">
+              <el-form-item label="角色名">
+                <el-input auto-complete="off"></el-input>
+              </el-form-item>
 
-    <el-form  label-width="80px" >
-        <el-form-item label="角色名" >
-          <el-input  auto-complete="off"></el-input>
-        </el-form-item>
-
-     
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-<el-button type="primary" @click="handleAdd">新增</el-button>
-      </div>
-
-
-             </div>
+              <el-form-item label="头像">
+                <el-upload
+                  :action="uploadurl"
+                  :show-file-list="false"
+                  :data="uploadData"
+                  :on-error="errorupload"
+                  :before-upload="beforeUpload"
+                  :on-success="successResave"
+                >
+                  <el-button size="small" type="primary">点击上传</el-button>
+                  <div slot="tip" class="el-upload__tip"></div>
+                </el-upload>
+              </el-form-item>
+            </el-form>
+            <div slot="footer" class="dialog-footer">
+              <el-button type="primary" @click="handleAdd">新增</el-button>
+            </div>
+          </div>
         </el-col>
       </el-row>
     </el-dialog>
@@ -202,9 +200,16 @@
 
 
 <script>
+import commonfun from "@/api/commonfun";
 export default {
   data() {
     return {
+      uploadPara:{
+        proType:"",
+        name:""
+      },
+      uploadurl: "",
+      uploadData: null,
       listLoading: false, // 列表加载进度
       dialogCustomerVisible: true, // 对话框是否显示
       searchCustomerVisible: true, // 搜索框是否显示
@@ -212,6 +217,10 @@ export default {
       sels: [], //列表选中列
       total: 0
     };
+  },
+  mounted() {
+    this.uploadurl = commonfun.UploadApiUrl();
+    this.uploadData=new FormData();
   },
   methods: {
     formatCreateTime(row, column) {
@@ -221,6 +230,37 @@ export default {
       }
       return "";
     },
+    //上传的地址
+    UploadUrlapi() {
+      //console.info("xxxxxxxxx:"+this.uploadurl)
+    },
+    beforeUpload(file) {
+      const isJPG = file.type === 'image/jpeg';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+      this.uploadData = {
+        dstype: this.uploadPara.proType,
+        name: this.uploadPara.name,
+        file:file
+     
+      };
+      console.log(this.uploadData);
+      let promise = new Promise(resolve => {
+        this.$nextTick(function() {
+          resolve(true);
+        });
+      });
+      return promise; //通过返回一个promis对象解决
+    },
+      successResave(response, file, fileList){
+           console.log(response)
+           if(response.code==10001){
+               this.uploadPara.proType="";
+               this.uploadPara.name="";
+           }
+     },
+      errorupload(response, file, fileList){
+           console.log(response)
+     },
     displaySearchTab() {
       this.searchCustomerVisible = !this.searchCustomerVisible;
     },
@@ -231,9 +271,12 @@ export default {
       this.page = val;
       // this.getroles();
     },
-     handleSelectMenu(key, keyPath) {
-        console.log(key, keyPath);
-      },
+    handleSelectMenu(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleAvatarSuccess(res, file) {
+      this.imageUrl = URL.createObjectURL(file.raw);
+    },
     handleAdd() {}
   }
 };

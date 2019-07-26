@@ -19,6 +19,8 @@ import './components/common/directives';
 import "babel-polyfill";
 Vue.config.productionTip = false;
 console.log('process:'+process.env.VUE_APP_URL)
+console.log('baseUrl:'+process.env.VUE_APP_baseUrl)
+
 
 Vue.use(VueI18n);
 Vue.use(ElementUI, {

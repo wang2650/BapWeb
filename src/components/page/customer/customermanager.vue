@@ -178,13 +178,17 @@
                 <el-upload
                   :action="uploadurl"
                   :show-file-list="false"
-                  :data="uploadData"
                   :on-error="errorupload"
                   :before-upload="beforeUpload"
                   :on-success="successResave"
+                  :http-request="uploadOk"
+              
                 >
-                  <el-button size="small" type="primary">点击上传</el-button>
-                  <div slot="tip" class="el-upload__tip"></div>
+                  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+        
+                  <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                    <img v-if="headImageUrl" :src="headImageUrl" class="avatar" />
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
             </el-form>
@@ -201,15 +205,13 @@
 
 <script>
 import commonfun from "@/api/commonfun";
+import axios from "axios";
+import storage from '@/api/storage';
 export default {
   data() {
     return {
-      uploadPara:{
-        proType:"",
-        name:""
-      },
-      uploadurl: "",
-      uploadData: null,
+      uploadurl:"",
+      headImageUrl:"http://localhost:5000/aaa/1.jpg",
       listLoading: false, // 列表加载进度
       dialogCustomerVisible: true, // 对话框是否显示
       searchCustomerVisible: true, // 搜索框是否显示
@@ -219,8 +221,6 @@ export default {
     };
   },
   mounted() {
-    this.uploadurl = commonfun.UploadApiUrl();
-    this.uploadData=new FormData();
   },
   methods: {
     formatCreateTime(row, column) {
@@ -231,17 +231,27 @@ export default {
       return "";
     },
     //上传的地址
-    UploadUrlapi() {
-      //console.info("xxxxxxxxx:"+this.uploadurl)
+    uploadOk(val) {
+      let fd = new FormData();
+
+      fd.append("deptname", "信息部");
+      fd.append("file", val.file);
+
+      axios.post(commonfun.UploadApiUrl(), fd, {headers: {
+            'Authorization':storage.getValue('token'),
+            'wxq':'dsfsdf123123333333'
+        }}).then(res => {
+        console.log(res);
+      });
     },
     beforeUpload(file) {
-      const isJPG = file.type === 'image/jpeg';
+      const isJPG = file.type === "image/jpeg";
       const isLt2M = file.size / 1024 / 1024 < 2;
       this.uploadData = {
+        CustomerId: "ceshi",
         dstype: this.uploadPara.proType,
         name: this.uploadPara.name,
-        file:file
-     
+        file: file
       };
       console.log(this.uploadData);
       let promise = new Promise(resolve => {
@@ -251,16 +261,16 @@ export default {
       });
       return promise; //通过返回一个promis对象解决
     },
-      successResave(response, file, fileList){
-           console.log(response)
-           if(response.code==10001){
-               this.uploadPara.proType="";
-               this.uploadPara.name="";
-           }
-     },
-      errorupload(response, file, fileList){
-           console.log(response)
-     },
+    successResave(response, file, fileList) {
+      console.log(response);
+      if (response.code == 10001) {
+        this.uploadPara.proType = "";
+        this.uploadPara.name = "";
+      }
+    },
+    errorupload(response, file, fileList) {
+      console.log(response);
+    },
     displaySearchTab() {
       this.searchCustomerVisible = !this.searchCustomerVisible;
     },

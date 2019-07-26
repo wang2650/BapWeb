@@ -4,7 +4,7 @@ import storage from '@/api/storage';
 
 // create an axios instance
 const service = axios.create({
-  baseURL: process.env.baseUrl, // url = base url + request url
+  baseURL: process.env.VUE_APP_baseUrl, // url = base url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 5000 // request timeout
 });
@@ -75,6 +75,9 @@ service.interceptors.response.use(
     let errormessage = error.message;
     if (error.response) {
       switch (error.response.status) {
+        case 204:
+          errormessage = '无内容返回';
+          break;
         case 400:
           errormessage = '未知请求';
           break;

@@ -176,19 +176,15 @@
 
               <el-form-item label="头像">
                 <el-upload
-                  :action="uploadurl"
+                  class="avatar-uploader"
+                  action="http://www.baidu.com"
                   :show-file-list="false"
-                  :on-error="errorupload"
                   :before-upload="beforeUpload"
-                  :on-success="successResave"
                   :http-request="uploadOk"
-              
+                  :limit="1"
                 >
-            
-        
-                  
-                    <img v-if="headImageUrl" :src="headImageUrl" class="avatar" />
-                    <i v-else class="el-icon-plus avatar-uploader-icon"></i><div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+                  <img v-if="headImageUrl" :src="headImageUrl" class="avatar" />
+                  <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
             </el-form>
@@ -206,12 +202,13 @@
 <script>
 import commonfun from "@/api/commonfun";
 import axios from "axios";
-import storage from '@/api/storage';
+import storage from "@/api/storage";
+import utils from "@/api/utils";
+import { Message } from "element-ui";
 export default {
   data() {
     return {
-      uploadurl:"",
-      headImageUrl:"http://localhost:5000/aaa/1.jpg",
+      headImageUrl: "",
       listLoading: false, // 列表加载进度
       dialogCustomerVisible: true, // 对话框是否显示
       searchCustomerVisible: true, // 搜索框是否显示
@@ -220,8 +217,7 @@ export default {
       total: 0
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     formatCreateTime(row, column) {
       let datetime = row.AddDateTime;
@@ -230,43 +226,52 @@ export default {
       }
       return "";
     },
+    handleAvatarSuccess(res, file) {
+      this.headImageUrl = URL.createObjectURL(file.raw);
+    },
+    uploadpicWrong() {
+      message({
+        message: "上传图片失败",
+        type: "warning"
+      });
+    },
+    returnurl() {
+      return commonfun.uploadurl();
+    },
     //上传的地址
     uploadOk(val) {
       let fd = new FormData();
 
       fd.append("deptname", "信息部");
-      fd.append("file", val.file);
+      fd.append("excelFile", val.file);
 
-      axios.post(commonfun.UploadApiUrl(), fd, {headers: {
-            'Authorization':storage.getValue('token'),
-            'wxq':'dsfsdf123123333333'
-        }}).then(res => {
-        console.log(res);
-      });
+      let uploadurl = commonfun.UploadApiUrl;
+      console.log("哒哒哒哒哒哒" + commonfun.UploadApiUrl);
+      axios
+        .post(commonfun.UploadApiUrl(), fd, {
+          headers: {
+            Authorization: storage.getValue("token"),
+            wxq: "1.jpg"
+          }
+        })
+        .then(res => {
+          console.log(JSON.stringify(res));
+          if (res.data.Code === 0) {
+            this.headImageUrl = "http://localhost:5000/" + res.data.Data;
+          } else {
+            console.log("dddd多");
+          }
+        });
     },
     beforeUpload(file) {
       const isJPG = file.type === "image/jpeg";
       const isLt2M = file.size / 1024 / 1024 < 2;
-      this.uploadData = {
-        CustomerId: "ceshi",
-        dstype: this.uploadPara.proType,
-        name: this.uploadPara.name,
-        file: file
-      };
-      console.log(this.uploadData);
       let promise = new Promise(resolve => {
         this.$nextTick(function() {
           resolve(true);
         });
       });
       return promise; //通过返回一个promis对象解决
-    },
-    successResave(response, file, fileList) {
-      console.log(response);
-      if (response.code == 10001) {
-        this.uploadPara.proType = "";
-        this.uploadPara.name = "";
-      }
     },
     errorupload(response, file, fileList) {
       console.log(response);

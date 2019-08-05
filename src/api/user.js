@@ -5,8 +5,7 @@
     return service({
       url: '/api/SystemManage/User/Login',
       method: 'post',
-      data:dataValue,
-      headers:{"aaaaaaa":"bb"}
+      data:dataValue
     })
   }
   // 修改密码

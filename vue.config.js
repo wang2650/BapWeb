@@ -12,7 +12,7 @@ module.exports = {
     assetsDir: 'assets', // 静态资源目录 (js, css, img, fonts)
     // indexPath : 'index.html',
     publicPath: './',
-    outputDir: 'dist',
+    outputDir: '../../Bap/WebApi/wwwroot',
     // indexPath: '#/login',
     productionSourceMap: false,
     lintOnSave: process.env.NODE_ENV === 'development',

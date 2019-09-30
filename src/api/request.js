@@ -20,12 +20,13 @@ service.interceptors.request.use(
       // ['X-Token'] is a custom headers key
       // please modify it according to the actual situation
       config.headers['Authorization'] = storage.getValue('token');
+      
     }
     return config;
   },
   error => {
     // do something with request error
-    console.log("aaaaaaa"+error); // for debug
+    console.log(error); // for debug
     return Promise.reject(error);
   }
 );
@@ -44,12 +45,12 @@ service.interceptors.response.use(
    */
 
   response => {
-    console.log("bbbbbbbbbbbb");
+
     const res = response.data;
     // if the custom code is not 20000, it is judged as an error.
     if (res.Code != 0) {
       Message({
-        message: res.Errors.join('  ') || '错误1',
+        message: res.Errors.join('  ') || '错误',
         type: 'error',
         duration: 5 * 1000
       });
@@ -69,13 +70,12 @@ service.interceptors.response.use(
       //   })
       // }
 
-      return Promise.reject(res.Errors.join('<br />') || '错误2');
+      return Promise.reject(res.Errors.join('<br />') || '错误');
     } else {
       return res;
     }
   },
   error => {
-    console.log("cccccccccccccccc");
     let errormessage = error.message;
     if (error.response) {
       switch (error.response.status) {

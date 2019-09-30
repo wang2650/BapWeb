@@ -8,11 +8,16 @@
           </router-link>
           <el-button class="error-btn" type="primary" size="large" @click="goBack">返回上一页</el-button>
       </div>
+          <FlowDesigner msg="Welcome to Your Vue.js App" />
   </div>
 </template>
 
 <script>
+import FlowDesigner from '../../components/FlowDesigner.vue';
 export default {
+  components: {
+    FlowDesigner,
+  },
   methods: {
       goBack(){
           this.$router.go(-1);

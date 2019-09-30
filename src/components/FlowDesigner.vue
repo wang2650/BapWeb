@@ -70,7 +70,6 @@
 </template>
 <script>
 import gucflow from "../utils/gucflow.js";
-import common from "../utils/common.js";
 import TaskNode from "./nodes/task.vue";
 import StartNode from "./nodes/start.vue";
 import StopNode from "./nodes/stop.vue";
@@ -567,77 +566,75 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-@unselectColor: rgb(49, 208, 198);
-@selectColor: #ea6f5a;
-
+<style  scoped>
 #designer {
-    width: 1060px;
-    height: 600px;
-    position: relative;
-    margin: 5px auto;
+  width: 1060px;
+  height: 600px;
+  position: relative;
+  margin: 5px auto;
 }
 #container {
-    position: absolute;
-    top: 0;
-    left: 58px;
-    border: @unselectColor 1px solid;
-    overflow: auto;
-    width: 1000px;
-    height: 600px;
-    #paper {
-        position: absolute;
-        z-index: 10;
-        top: 0;
-        left: 0;
-        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJ2LTciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzIGlkPSJ2LTYiPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuXzAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHJlY3QgaWQ9InYtOCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0iI0FBQUFBQSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgaWQ9InYtMTAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybl8wKSIvPjwvc3ZnPg==");
-        text {
-            text-anchor: middle;
-            font-size: 14px;
-            stroke-width: 0;
-        }
-    }
+  position: absolute;
+  top: 0;
+  left: 58px;
+  border: #31d0c6 1px solid;
+  overflow: auto;
+  width: 1000px;
+  height: 600px;
+}
+#container #paper {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJ2LTciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzIGlkPSJ2LTYiPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuXzAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHg9IjAiIHk9IjAiIHdpZHRoPSIxMCIgaGVpZ2h0PSIxMCI+PHJlY3QgaWQ9InYtOCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0iI0FBQUFBQSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgaWQ9InYtMTAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybl8wKSIvPjwvc3ZnPg==");
+}
+#container #paper text {
+  text-anchor: middle;
+  font-size: 14px;
+  stroke-width: 0;
 }
 #toolbar {
-    position: absolute;
-    width: 58px;
-    top: 0;
-    left: 0;
-    padding-top: 10px;
-    div {
-        width: 50px;
-        background: @unselectColor;
-        margin: 10px auto;
-        cursor: pointer;
-        z-index: 20;
-        padding: 2px;
-        img {
-            width: 30px;
-            height: 30px;
-        }
-        p {
-            margin: 0;
-            padding: 0;
-            height: 12px;
-            line-height: 12px;
-            font-size: 12px;
-        }
-    }
-    .active {
-        background: @selectColor;
-    }
+  position: absolute;
+  width: 58px;
+  top: 0;
+  left: 0;
+  padding-top: 10px;
+}
+#toolbar div {
+  width: 50px;
+  background: #31d0c6;
+  margin: 10px auto;
+  cursor: pointer;
+  z-index: 20;
+  padding: 2px;
+}
+#toolbar div img {
+  width: 30px;
+  height: 30px;
+}
+#toolbar div p {
+  margin: 0;
+  padding: 0;
+  height: 12px;
+  line-height: 12px;
+  font-size: 12px;
+}
+#toolbar .active {
+  background: #ea6f5a;
 }
 .select {
-    fill: @selectColor;
-    stroke: @selectColor;
+  fill: #ea6f5a;
+  stroke: #ea6f5a;
 }
 .unselect {
-    fill: @unselectColor;
-    stroke: @unselectColor;
+  fill: #31d0c6;
+  stroke: #31d0c6;
 }
 .delete {
-    cursor: pointer;
-    z-index: 11;
-    fill: @selectColor;
+  cursor: pointer;
+  z-index: 11;
+  fill: #ea6f5a;
 }
+
 </style>

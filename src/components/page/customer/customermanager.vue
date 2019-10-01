@@ -176,15 +176,14 @@
 
               <el-form-item label="头像">
                 <el-upload
-                  accept=".jpg, .jpeg, .png"
                   class="avatar-uploader"
-                  :action="uploadurl"
+                  action="http://www.baidu.com"
                   :show-file-list="false"
-                  :headers="picheaders"
-                  :on-success="handleAvatarSuccess"
-                  :before-upload="beforeAvatarUpload"
+                  :before-upload="beforeUpload"
+                  :http-request="uploadOk"
+                  :limit="1"
                 >
-                  <img v-if="imageUrl" :src="imageUrl" class="avatar" />
+                  <img v-if="headImageUrl" :src="headImageUrl" class="avatar" />
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
               </el-form-item>
@@ -204,12 +203,12 @@
 import commonfun from "@/api/commonfun";
 import axios from "axios";
 import storage from "@/api/storage";
+import utils from "@/api/utils";
+import { Message } from "element-ui";
 export default {
   data() {
     return {
-      picheaders:{},
-      uploadurl: "",
-      imageUrl: "",
+      headImageUrl: "",
       listLoading: false, // 列表加载进度
       dialogCustomerVisible: true, // 对话框是否显示
       searchCustomerVisible: true, // 搜索框是否显示
@@ -218,10 +217,7 @@ export default {
       total: 0
     };
   },
-  mounted() {
-    this.picheaders={wxq: "aaa.jpg"};
-    this.uploadurl = commonfun.UploadApiUrl();
-  },
+  mounted() {},
   methods: {
     formatCreateTime(row, column) {
       let datetime = row.AddDateTime;
@@ -231,48 +227,45 @@ export default {
       return "";
     },
     handleAvatarSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
+      this.headImageUrl = URL.createObjectURL(file.raw);
     },
-    beforeAvatarUpload(file) {
-      const isJPG = file.type === "image/jpeg";
-      const isLt2M = file.size / 1024 / 1024 < 2;
-
-      if (!isJPG) {
-        this.$message.error("上传头像图片只能是 JPG 格式!");
-      }
-      if (!isLt2M) {
-        this.$message.error("上传头像图片大小不能超过 2MB!");
-      }
-      return isJPG && isLt2M;
+    uploadpicWrong() {
+      message({
+        message: "上传图片失败",
+        type: "warning"
+      });
+    },
+    returnurl() {
+      return commonfun.uploadurl();
     },
     //上传的地址
     uploadOk(val) {
       let fd = new FormData();
 
       fd.append("deptname", "信息部");
-      fd.append("file", val.file);
+      fd.append("excelFile", val.file);
 
+      let uploadurl = commonfun.UploadApiUrl;
+      console.log("哒哒哒哒哒哒" + commonfun.UploadApiUrl);
       axios
         .post(commonfun.UploadApiUrl(), fd, {
           headers: {
             Authorization: storage.getValue("token"),
-            wxq: "dsfsdf123123333333"
+            wxq: "1.jpg"
           }
         })
         .then(res => {
-          console.log(res);
+          console.log(JSON.stringify(res));
+          if (res.data.Code === 0) {
+            this.headImageUrl = "http://localhost:5000/" + res.data.Data;
+          } else {
+            console.log("dddd多");
+          }
         });
     },
     beforeUpload(file) {
       const isJPG = file.type === "image/jpeg";
       const isLt2M = file.size / 1024 / 1024 < 2;
-      this.uploadData = {
-        CustomerId: "ceshi",
-        dstype: this.uploadPara.proType,
-        name: this.uploadPara.name,
-        file: file
-      };
-      console.log(this.uploadData);
       let promise = new Promise(resolve => {
         this.$nextTick(function() {
           resolve(true);
@@ -280,8 +273,9 @@ export default {
       });
       return promise; //通过返回一个promis对象解决
     },
-    successResave(response, file, fileList) {},
-    errorupload(response, file, fileList) {},
+    errorupload(response, file, fileList) {
+      console.log(response);
+    },
     displaySearchTab() {
       this.searchCustomerVisible = !this.searchCustomerVisible;
     },

@@ -1,4 +1,4 @@
-'use strict'
+﻿'use strict'
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require("html-webpack-plugin")
@@ -9,20 +9,23 @@ function resolve(dir) {
 
 
 module.exports = {
-  assetsDir: 'assets', // 静态资源目录 (js, css, img, fonts)
-  // indexPath : 'index.html',
-  publicPath: './',
-  outputDir: 'dist',
-  // indexPath: '#/login',
-  productionSourceMap: false,
-  lintOnSave: process.env.NODE_ENV === 'development',
-  devServer: {
-    port: 80,
-    host: '127.0.0.1',
-    open: false,
-    overlay: {
-      warnings: false,
-      errors: true
+    assetsDir: 'assets', // 静态资源目录 (js, css, img, fonts)
+    indexPath : 'index.html',
+    publicPath: './',
+    outputDir: '../wwwroot',
+    // indexPath: '#/login',
+    productionSourceMap: false,
+    lintOnSave: process.env.NODE_ENV === 'development',
+    devServer: {
+        port: 8889,
+        host:'127.0.0.1',
+        open: false,
+        overlay: {
+          warnings: false,
+          errors: true
+        },
+        proxy:process.env.WEB_API_URL
+        
     },
     proxy: process.env.WEB_API_URL
   },

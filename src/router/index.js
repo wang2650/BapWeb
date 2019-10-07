@@ -20,6 +20,11 @@ export default new Router({
                     meta: { title: '用户管理' }
                 },
                 {
+                    path: '/workflow',
+                    component: resolve => require(['../components/page/workflow/FlowDesigner.vue'], resolve),
+                    meta: { title: '工作流设计' }
+                },
+                {
                     path: '/myselfinfo',
                     component: resolve => require(['../components/page/user/myselfinfo.vue'], resolve),
                     meta: { title: '个人信息' }
@@ -39,7 +44,7 @@ export default new Router({
                     component: resolve => require(['../components/page/customer/customermanager.vue'], resolve),
                     meta: { title: '干部管理' }
                 },
-                
+
                 {
                     path: '/departmentmanage',
                     component: resolve => require(['../components/page/department/departmentmanage.vue'], resolve),

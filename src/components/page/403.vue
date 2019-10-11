@@ -8,15 +8,20 @@
           </router-link>
           <el-button class="error-btn" type="primary" size="large" @click="goBack">返回上一页</el-button>
       </div>
+
   </div>
 </template>
 
 <script>
+
 export default {
+
+ 
   methods: {
       goBack(){
           this.$router.go(-1);
       }
+      
   }
 }
 </script>

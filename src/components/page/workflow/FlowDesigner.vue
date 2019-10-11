@@ -141,6 +141,7 @@
           :key="'line'+item.id"
           cursor="pointer"
           @dblclick="lineDblClick(item)"
+          @contextmenu="lineDblClick(item)"
           @click.stop="select('line',item.id)"
           :class="tempData.currentSelect.type=='line'&&tempData.currentSelect.id==item.id?'select':'unselect'"
         >

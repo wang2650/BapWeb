@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="ms-login">
-      <div class="ms-title">后台管理系统</div>
+      <div class="ms-title" @contextmenu.prevent="test('1')">后台管理系统</div>
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="0px" class="ms-content">
         <el-form-item prop="UserName">
           <el-input v-model="ruleForm.UserName" placeholder="UserName">
@@ -22,20 +22,47 @@
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </div>
         <p class="login-tips">Tips : 用户名和密码随便填。</p>
+        <form-create v-model="model" :rule="rule" :option="option"></form-create>
       </el-form>
     </div>
   </div>
 </template>
 
 <script>
+import Vue from "vue";
 import Vuex from "vuex";
 import storage from "@/api/storage";
 import { login } from "@/api/user";
 import routes from "@/router/index";
 import { GetMenuTreeForCurrentUser } from "@/api/menu";
+import formCreate from "form-create/element";
+import { maker } from "form-create/element";
+Vue.use(formCreate);
 export default {
+  components: {
+    // formCreate:formCreaet.$form()
+  },
   data: function() {
     return {
+      model: {},
+      option: {
+        onSubmit: function(formData) {
+          alert(JSON.stringify(formData));
+        }
+      },
+      //表单生成规则
+      rule: [
+        {
+          type: "input",
+          field: "goods_name",
+          title: "商品名称"
+        },
+        {
+          type: "datePicker",
+          field: "created_at",
+          title: "创建时间"
+        }
+      ],
       ruleForm: {
         UserName: "administrator",
         PassWord: "12345678"
@@ -58,16 +85,15 @@ export default {
               if (response.Code === 0) {
                 storage.set("token", response.Data);
 
-              let result=  GetMenuTreeForCurrentUser()
+                let result = GetMenuTreeForCurrentUser()
                   .then(function(response) {
                     storage.set(
                       "sidebarMenu",
                       JSON.stringify(response.Data.Result)
                     );
-                       routes.push("/");
+                    routes.push("/");
                   })
                   .catch(function(error) {});
-
               }
             })
             .catch(function(error) {

@@ -39,7 +39,7 @@ import { GetUrlRightForCurrentUser } from "@/api/menu";
 router.beforeEach((to, from, next) => {
     NProgress.start()
     // document.title = to.meta.title;
-    const whileList=['/login','/help','contact']
+    const whileList=['/login','/help','/contact','/403','/404']
 
     const token =  storage.getValue("token");
 

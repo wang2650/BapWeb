@@ -22,9 +22,10 @@
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </div>
         <p class="login-tips">Tips : 用户名和密码随便填。</p>
-        <form-create v-model="model" :rule="rule" :option="option"></form-create>
+       
       </el-form>
     </div>
+     <form-create  v-model="fApi" :rule="rule" :option="option"></form-create>
   </div>
 </template>
 
@@ -35,19 +36,26 @@ import storage from "@/api/storage";
 import { login } from "@/api/user";
 import routes from "@/router/index";
 import { GetMenuTreeForCurrentUser } from "@/api/menu";
-import formCreate from "form-create/element";
-import { maker } from "form-create/element";
-Vue.use(formCreate);
-export default {
-  components: {
-    // formCreate:formCreaet.$form()
-  },
+import formCreate, {maker} from '@form-create/element-ui'
+
+ export default {
+   components: {
+       formCreate: formCreate.$form()
+   },
   data: function() {
     return {
+
       model: {},
+      fApi:{},
       option: {
-        onSubmit: function(formData) {
-          alert(JSON.stringify(formData));
+        onSubmit: function(formData,fApi) {
+         // alert(JSON.stringify(formData));
+          
+           console.info(fApi);
+          //this.fApi.btn.loading();
+        },
+        mounted: function(){
+        
         }
       },
       //表单生成规则
@@ -105,7 +113,10 @@ export default {
         }
       });
     }
-  }
+  },
+  mounted:function(){
+  
+    }
 };
 $(function() {
   storage.clear();

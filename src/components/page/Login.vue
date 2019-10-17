@@ -21,11 +21,21 @@
         <div class="login-btn">
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
         </div>
+        <slide-verify
+          :l="42"
+          :r="10"
+          :w="310"
+          :h="155"
+          slider-text="向右滑动"
+          @success="onSuccess"
+          @fail="onFail"
+          @refresh="onRefresh"
+        ></slide-verify>
+        <div>{{msg}}</div>
         <p class="login-tips">Tips : 用户名和密码随便填。</p>
-       
       </el-form>
     </div>
-     <form-create  v-model="fApi" :rule="rule" :option="option"></form-create>
+    <!-- <form-create v-model="fApi" :rule="rule" :option="option"></form-create> -->
   </div>
 </template>
 
@@ -36,27 +46,27 @@ import storage from "@/api/storage";
 import { login } from "@/api/user";
 import routes from "@/router/index";
 import { GetMenuTreeForCurrentUser } from "@/api/menu";
-import formCreate, {maker} from '@form-create/element-ui'
-
- export default {
-   components: {
-       formCreate: formCreate.$form()
-   },
+import formCreate, { maker } from "@form-create/element-ui";
+import SlideVerify from "vue-monoplasty-slide-verify";
+Vue.use(SlideVerify);
+export default {
+  components: {
+  
+    formCreate: formCreate.$form()
+  },
   data: function() {
     return {
-
+      msg:"拖动",
       model: {},
-      fApi:{},
+      fApi: {},
       option: {
-        onSubmit: function(formData,fApi) {
-         // alert(JSON.stringify(formData));
-          
-           console.info(fApi);
+        onSubmit: function(formData, fApi) {
+          // alert(JSON.stringify(formData));
+
+          console.info(fApi);
           //this.fApi.btn.loading();
         },
-        mounted: function(){
-        
-        }
+        mounted: function() {}
       },
       //表单生成规则
       rule: [
@@ -112,11 +122,18 @@ import formCreate, {maker} from '@form-create/element-ui'
           return false;
         }
       });
+    },
+    onSuccess() {
+      this.msg = "login success";
+    },
+    onFail() {
+      this.msg = "";
+    },
+    onRefresh() {
+      this.msg = "";
     }
   },
-  mounted:function(){
-  
-    }
+  mounted: function() {}
 };
 $(function() {
   storage.clear();
@@ -164,6 +181,6 @@ $(function() {
 .login-tips {
   font-size: 12px;
   line-height: 30px;
-  color: #fff;
+  color: rgb(179, 19, 19);
 }
 </style>
